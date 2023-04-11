@@ -1,7 +1,22 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddControllers();
+
+IServiceCollection services = builder.Services;
+services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            // https://stackoverflow.com/questions/42859101/asp-net-core-cross-origin-request-to-services-preflight-returns-code-204-inst
+            builder
+                .WithOrigins("http://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
 
@@ -20,6 +35,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
-
+app.MapControllers(); 
+app.UseCors();
 app.Run();
