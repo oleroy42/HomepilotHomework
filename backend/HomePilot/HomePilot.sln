@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePilot", "HomePilot\HomePilot.csproj", "{0F0694F2-B76E-4145-9137-F43D37387DA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePilot", "HomePilot\HomePilot.csproj", "{0F0694F2-B76E-4145-9137-F43D37387DA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePilotTests", "HomePilotTests\HomePilotTests.csproj", "{8EDC0249-6444-46BD-9FA1-E888CBB28937}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePilotTests", "HomePilotTests\HomePilotTests.csproj", "{8EDC0249-6444-46BD-9FA1-E888CBB28937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePilot.Db", "HomePilot.Db\HomePilot.Db.csproj", "{558901D2-E7E7-4AB8-8D08-B45E2B5D2E33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8EDC0249-6444-46BD-9FA1-E888CBB28937}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDC0249-6444-46BD-9FA1-E888CBB28937}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EDC0249-6444-46BD-9FA1-E888CBB28937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{558901D2-E7E7-4AB8-8D08-B45E2B5D2E33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558901D2-E7E7-4AB8-8D08-B45E2B5D2E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558901D2-E7E7-4AB8-8D08-B45E2B5D2E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558901D2-E7E7-4AB8-8D08-B45E2B5D2E33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
