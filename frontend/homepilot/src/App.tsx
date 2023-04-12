@@ -1,18 +1,45 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import AmendmentTableLoaded from './AmendmentTableLoaded.tsx';
+
+interface Lease {
+  id: string;
+  name: string;
+  rent: number;
+}
+
+interface Tenant {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface Amendment {
+  lease: Lease;
+  effectiveDate: string;
+  entries: Tenant[];
+  exits: Tenant[];
+  oldRent: number;
+}
 
 function App() {
-  const [hello, setHello] = useState<string | null >(null);
+  const [amendments, setAmendments] = useState<Amendment[] | null >(null);
 
   useEffect(() => {
-    axios.get('https://localhost:7067/amendments/hello')
-      .then(res => {
-            setHello(res.data);
-        }
-      )
-  }, );
+    if (!amendments){
+      axios.get('https://localhost:7067/amendments')
+        .then(res => {
+              setAmendments(res.data);
+          }
+        );
+    }
+  }, [amendments]);
 
-  return (<div>{!!hello ? hello : 'loading' }</div>);
+  return (<div>
+          {!!amendments 
+            ? <AmendmentTableLoaded amendments={amendments}/>
+            : 'loading' }
+          </div>);
   
 }
 

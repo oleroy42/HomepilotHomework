@@ -20,6 +20,12 @@ public class AmendmentModel
 
     public string? Comment { get;private init; }
 
+    [InverseProperty("AmendmentEntry")]
+    public virtual ICollection<LeaseTenantModel> Entries { get; set; }
+
+    [InverseProperty("AmendmentExit")]
+    public virtual ICollection<LeaseTenantModel> Exits { get; set; }
+
     public AmendmentModel(Guid leaseId, DateTimeOffset effectiveDate, int oldRentInCents, string? comment)
     {
         LeaseId = leaseId;
