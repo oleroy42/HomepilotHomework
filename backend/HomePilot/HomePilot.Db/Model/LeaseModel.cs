@@ -16,14 +16,21 @@ public class LeaseModel
     public string Name { get; private init; } = null!;
 
     public DateTimeOffset StartDate { get; private init; }
-    public DateTimeOffset EndDate { get; private init; }
+    public DateTimeOffset? EndDate { get; private init; }
     public int RentInCents { get; private init; }
 
-    public LeaseModel(string name, DateTimeOffset startDate, DateTimeOffset endDate, int rentInCents)
+    public LeaseModel(string name, DateTimeOffset startDate, DateTimeOffset? endDate, int rentInCents)
     {
         Name = name;
         StartDate = startDate;
         EndDate = endDate;
+        RentInCents = rentInCents;
+    }
+
+    public LeaseModel(string name, DateTimeOffset startDate, int rentInCents)
+    {
+        Name = name;
+        StartDate = startDate;
         RentInCents = rentInCents;
     }
 }

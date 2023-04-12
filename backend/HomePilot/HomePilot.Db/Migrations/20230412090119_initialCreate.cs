@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -22,7 +23,7 @@ namespace HomePilot.Db.Migrations
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StartDate = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: false),
-                    EndDate = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: false),
+                    EndDate = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
                     RentInCents = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -77,6 +78,16 @@ namespace HomePilot.Db.Migrations
                 table: "LeaseTenants",
                 columns: new[] { "TenantId", "LeaseId" },
                 unique: true);
+
+            // Fill the db
+            migrationBuilder.Sql(
+                "INSERT INTO tenants (Id, FirstName , LastName) VALUES (UUID(), 'John', 'Doe'), (UUID(), 'Jane', 'Doe'), (UUID(), 'John', 'Smith'), (UUID(), 'Jane', 'Smith'), (UUID(), 'John', 'Jones'), (UUID(), 'Jane', 'Jones');");
+
+            migrationBuilder.Sql(
+                "INSERT INTO leases (id, name, StartDate, EndDate, RentInCents) VALUES (UUID(), 'Lease 1', '2019-01-01', '2020-12-01', 100000), (UUID(), 'Lease 2', '2019-01-01', null, 110000),  (UUID(), 'Lease 3', '2019-01-01', null, 120000);");
+
+            migrationBuilder.Sql(
+                "INSERT INTO leasetenants(LeaseId, TenantId) select l.Id, t.Id from tenants t join leases l limit 2;");
         }
 
         /// <inheritdoc />

@@ -25,7 +25,7 @@ namespace HomePilot.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<DateTimeOffset>("EndDate")
+                    b.Property<DateTimeOffset?>("EndDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")

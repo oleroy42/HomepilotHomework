@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomePilot.Db.Migrations
 {
     [DbContext(typeof(HomePilotDbContext))]
-    [Migration("20230411155403_initialCreate")]
+    [Migration("20230412090119_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -28,7 +28,7 @@ namespace HomePilot.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<DateTimeOffset>("EndDate")
+                    b.Property<DateTimeOffset?>("EndDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
