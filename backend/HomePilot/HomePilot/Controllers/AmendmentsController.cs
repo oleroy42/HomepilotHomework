@@ -1,4 +1,5 @@
 ﻿using HomePilot.Controllers.Dtos;
+using HomePilot.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomePilot.Controllers;
@@ -7,27 +8,19 @@ namespace HomePilot.Controllers;
 [Route("amendments")]
 public class AmendmentsController : ControllerBase
 {
+    private readonly AmendmentsManager _amendmentsManager;
+
+    public AmendmentsController(AmendmentsManager amendmentsManager)
+    {
+        _amendmentsManager = amendmentsManager;
+    }
+
     [HttpGet("hello")]
     public string Hello() =>
         "Hello world";
 
 
     [HttpGet()]
-    public Task<List<AmendmentDto>> GetAmendments() => Task.FromResult(
-        new List<AmendmentDto>
-        { GetDefaultAmendmentDto() });
-
-    private static AmendmentDto GetDefaultAmendmentDto()
-    {
-        return new AmendmentDto
-        {
-            EffectiveDate = DateTime.Now,
-            Entries = new() { new TenantDto { FirstName = "In", LastName = "LastName", Id = Guid.NewGuid() } },
-            Id = Guid.NewGuid(),
-            OldRent = 25000,
-            Exits = new() { new TenantDto { FirstName = "Out", LastName = "LastName", Id = Guid.NewGuid() } },
-            Lease = new LeaseDto { Id = Guid.NewGuid(), Name = "Lease 1", Rent = 20000 }
-        };
-    }
+    public Task<List<AmendmentDto>> GetAmendments() => _amendmentsManager.GetAmendments();
 }
 

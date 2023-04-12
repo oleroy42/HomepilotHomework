@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HomePilot.Db\HomePilot.Db.csproj" />
+  </ItemGroup>
+
 </Project>

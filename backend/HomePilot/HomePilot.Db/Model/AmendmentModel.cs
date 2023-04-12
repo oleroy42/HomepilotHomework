@@ -21,10 +21,10 @@ public class AmendmentModel
     public string? Comment { get;private init; }
 
     [InverseProperty("AmendmentEntry")]
-    public virtual ICollection<LeaseTenantModel> Entries { get; set; }
+    public virtual IList<LeaseTenantModel> Entries { get; set; } = new List<LeaseTenantModel>();
 
     [InverseProperty("AmendmentExit")]
-    public virtual ICollection<LeaseTenantModel> Exits { get; set; }
+    public virtual IList<LeaseTenantModel> Exits { get; set; } = new List<LeaseTenantModel>();
 
     public AmendmentModel(Guid leaseId, DateTimeOffset effectiveDate, int oldRentInCents, string? comment)
     {

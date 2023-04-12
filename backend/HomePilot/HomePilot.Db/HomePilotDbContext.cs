@@ -6,7 +6,8 @@ namespace HomePilot.Db
 {
     public class HomePilotDbContext : DbContext
     {
-        private const string HomePilotDbConnectionString = "Database=HomePilot; Data Source=localhost; Port=3333; User Id=root; Password=Coucou42";
+        public const string HomePilotDbConnectionString = "Database=HomePilot; Data Source=localhost; Port=3333; User Id=root; Password=Coucou42";
+        public static readonly MariaDbServerVersion HomerPilotMariaDbVersion = new MariaDbServerVersion(new Version(10, 6));
 
         // https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
         public class HomePilotDbContextDesignFactory : IDesignTimeDbContextFactory<HomePilotDbContext>
@@ -17,7 +18,7 @@ namespace HomePilot.Db
 
                 optionsBuilder.UseMySql(
                     HomePilotDbConnectionString,
-                    new MariaDbServerVersion(new Version(10, 6)),
+                    HomerPilotMariaDbVersion,
                     options =>
                     {
                         /*

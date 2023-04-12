@@ -1,3 +1,6 @@
+using HomePilot;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +20,8 @@ services.AddCors(options =>
                 .AllowCredentials();
         });
 });
+
+services.ConfigureServices();
 
 var app = builder.Build();
 
