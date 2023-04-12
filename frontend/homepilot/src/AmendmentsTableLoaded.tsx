@@ -1,6 +1,6 @@
 import { Amendment } from "./App";
 
-const AmendmentTableLoaded = (
+const AmendmentsTableLoaded = (
     {
         amendments
     }: {
@@ -9,7 +9,7 @@ const AmendmentTableLoaded = (
 ) => {
 
     return (
-        <table class="table">
+        <table className='table'>
             <thead>
                 <tr>
                 <th>Nom du bail</th>
@@ -23,10 +23,10 @@ const AmendmentTableLoaded = (
                 {amendments.map(a => 
                     <tr>
                     <td>{a.lease.name}</td>
-                    <td>{a.effectiveDate}</td>
+                    <td>{(new Date(a.effectiveDate)).toLocaleDateString('fr-FR')}</td>
                     <td>{a.entries.map(e => e.firstName + ' ' + e.lastName).join(',')}</td>
                     <td>{a.exits.map(e => e.firstName + ' ' + e.lastName).join(',')}</td>
-                    <td>TODO</td>
+                    <td>{ !! a.oldRent ?  new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(a.lease.rent / 100) : null}</td>
                     </tr>
                     )}
                 
@@ -36,4 +36,4 @@ const AmendmentTableLoaded = (
     );
 }
 
-export default AmendmentTableLoaded;
+export default AmendmentsTableLoaded;

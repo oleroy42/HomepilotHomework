@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import AmendmentTableLoaded from './AmendmentTableLoaded.tsx';
+import AmendmentsTableLoaded from './AmendmentsTableLoaded.tsx';
 
 interface Lease {
   id: string;
@@ -37,7 +37,7 @@ function App() {
 
   return (<div>
           {!!amendments 
-            ? <AmendmentTableLoaded amendments={amendments}/>
+            ? <AmendmentsTableLoaded amendments={amendments}/>
             : 'loading' }
           </div>);
   
