@@ -10,10 +10,16 @@ namespace HomePilot.Db.Model;
 [Table("LeaseTenants")]
 public class LeaseTenantModel
 {
-    [Required, ForeignKey("Lease")] public Guid LeaseId { /* TODO : private */ get; private init; }
+    [Required, ForeignKey("Lease")] public Guid LeaseId { get; private init; }
     public virtual LeaseModel Lease { get; private init; } = null!;
 
-    [Required, ForeignKey("Tenant")] public Guid TenantId { /* TODO : private */ get; private init; }
+    [Required, ForeignKey("Tenant")] public Guid TenantId { get; private init; }
     public virtual TenantModel Tenant { get; private init; } = null!;
+
+    [ForeignKey("AmendmentEntry")] public Guid? AmendmentEntryId { get; private set; }
+    public virtual AmendmentModel? AmendmentEntry { get; private set; } = null!;
+
+    [ForeignKey("AmendmentExit")] public Guid? AmendmentExitId { get; private set; }
+    public virtual AmendmentModel? AmendmentExit { get; private set; } = null!;
 }
 

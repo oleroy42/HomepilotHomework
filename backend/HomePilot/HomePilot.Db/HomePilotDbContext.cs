@@ -50,6 +50,7 @@ namespace HomePilot.Db
         public virtual DbSet<LeaseModel> Leases { get; set; } = null!;
 
         public virtual DbSet<TenantModel> Tenants { get; set; } = null!;
+        public virtual DbSet<AmendmentModel> Amendments { get; set; } = null!;
 
         public virtual DbSet<LeaseTenantModel> LeaseTenants { get; set; } = null!;
 

@@ -17,7 +17,7 @@ public class LeaseModel
 
     public DateTimeOffset StartDate { get; private init; }
     public DateTimeOffset? EndDate { get; private init; }
-    public int RentInCents { get; private init; }
+    public int RentInCents { get; private set; }
 
     public LeaseModel(string name, DateTimeOffset startDate, DateTimeOffset? endDate, int rentInCents)
     {
