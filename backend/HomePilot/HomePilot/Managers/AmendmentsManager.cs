@@ -1,8 +1,9 @@
-﻿using HomePilot.Controllers;
-using HomePilot.Controllers.Dtos;
+﻿using HomePilot.Controllers.Dtos;
 using HomePilot.Db;
 using HomePilot.Db.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using static HomePilot.Controllers.AmendmentsController;
 
 namespace HomePilot.Managers;
 
@@ -15,7 +16,7 @@ public class AmendmentsManager
         _homePilotDbContext = homePilotDbContext;
     }
 
-    public async Task<List<AmendmentDto>> GetAmendments()
+    public async Task<List<AmendmentDto>> GetAmendmentsAsync()
     {
         List<AmendmentModel> amendments = await _homePilotDbContext.Amendments
                                                                  .Include(a => a.Lease)
@@ -72,6 +73,37 @@ public class AmendmentsManager
             FirstName = tenant.FirstName,
             LastName = tenant.LastName
         };
+    }
+
+    public async Task<Guid> AddAmendmentAsync(Guid leaseId, List<Person> exits, List<Person> entries, int? newRent)
+    {
+        //TODO: check lease is still active
+        var newAmendment = new AmendmentModel(leaseId, DateTime.Now, newRent, null);
+        _homePilotDbContext.Amendments.Add(newAmendment);
+
+        //TODO: check people exiting exists
+        if (exits.Any())
+        {
+            //TODO: hacky : do it properly.
+            var hackyList = exits.Select(e => e.FirstName + e.LastName).ToHashSet();
+            var exitTenants = await _homePilotDbContext.LeaseTenants.Where(t => hackyList.Contains(t.Tenant.FirstName + t.Tenant.LastName) && t.LeaseId == leaseId).ToListAsync();
+
+            foreach (var e in exitTenants)
+            {
+                e.AmendmentExitId = newAmendment.Id;
+                _homePilotDbContext.Entry(e).State = EntityState.Modified;
+            }
+
+        }
+        foreach(var entry in entries)
+        {
+            var newTenant = new TenantModel(entry.FirstName, entry.LastName);
+            _homePilotDbContext.Tenants.Add(newTenant);
+            _homePilotDbContext.LeaseTenants.Add(new LeaseTenantModel(leaseId, newTenant.Id, newAmendment.Id));
+        }
+
+        await _homePilotDbContext.SaveChangesAsync();
+        return newAmendment.Id;
     }
 }
 

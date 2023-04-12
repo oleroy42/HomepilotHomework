@@ -3,6 +3,7 @@ using System;
 using HomePilot.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomePilot.Db.Migrations
 {
     [DbContext(typeof(HomePilotDbContext))]
-    partial class HomePilotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230412222148_nullableRentForAmendment")]
+    partial class nullableRentForAmendment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

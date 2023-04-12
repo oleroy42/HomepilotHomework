@@ -21,7 +21,7 @@ const AmendmentsTableLoaded = (
             </thead>
             <tbody>
                 {amendments.map(a => 
-                    <tr>
+                    <tr key={a.id}>
                     <td>{a.lease.name}</td>
                     <td>{(new Date(a.effectiveDate)).toLocaleDateString('fr-FR')}</td>
                     <td>{a.entries.map(e => e.firstName + ' ' + e.lastName).join(',')}</td>

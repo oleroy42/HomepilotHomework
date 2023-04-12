@@ -32,6 +32,7 @@ public static class HomePilotInjections
                 }
             ));
         services.AddScoped<AmendmentsManager>();
+        services.AddScoped<LeaseManager>();
 
     }
 }

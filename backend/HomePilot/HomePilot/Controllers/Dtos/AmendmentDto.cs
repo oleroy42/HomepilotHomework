@@ -8,7 +8,7 @@ public class AmendmentDto
     public DateTimeOffset EffectiveDate { get; set; }
     public List<TenantDto> Entries { get; set; } = new List<TenantDto>();
     public List<TenantDto> Exits { get; set; } = new List<TenantDto>();
-    public int OldRent { get; set; }
+    public int? OldRent { get; set; }
 
     public static AmendmentDto GetDefaultAmendmentDto()
     {

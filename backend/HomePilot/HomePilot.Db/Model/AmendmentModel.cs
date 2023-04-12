@@ -16,7 +16,7 @@ public class AmendmentModel
 
     public DateTimeOffset EffectiveDate { get; private init; } = default!;
 
-    public int OldRentInCents { get; private init; }
+    public int? OldRentInCents { get; private init; }
 
     public string? Comment { get;private init; }
 
@@ -26,7 +26,7 @@ public class AmendmentModel
     [InverseProperty("AmendmentExit")]
     public virtual IList<LeaseTenantModel> Exits { get; set; } = new List<LeaseTenantModel>();
 
-    public AmendmentModel(Guid leaseId, DateTimeOffset effectiveDate, int oldRentInCents, string? comment)
+    public AmendmentModel(Guid leaseId, DateTimeOffset effectiveDate, int? oldRentInCents, string? comment)
     {
         LeaseId = leaseId;
         EffectiveDate = effectiveDate;
